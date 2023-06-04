@@ -1,12 +1,15 @@
 import { useState } from "react"
 import axios from "axios"
+import { URL_API } from "../../url"
+
 
 
 const useUserCrud = () => {
 
     const [users, setUsers] = useState()
 
-    const url = 'https://users-crud.academlo.tech/users/'
+//console.log(URL_API.url)
+const url = URL_API.url
 
     //GET
     const getAllUsers = () =>{
@@ -24,17 +27,17 @@ const useUserCrud = () => {
 
     //DELETE
     const deleteUserById = id =>{
-        const urlDelete = `${url}${id}/`
+        const urlDelete = `${url}/${id}`
         axios.delete(urlDelete)
         .then(res => getAllUsers())
         .catch(err =>console.log(err))
         
     }
 
-    //PATCH
+    //PUT
     const updateUserById = (id, data) => {
-        const urlUpdate = `${url}${id}/`
-        axios.patch(urlUpdate, data)
+        const urlUpdate = `${url}/${id}`
+        axios.put(urlUpdate, data)
         .then(res => getAllUsers())
         .catch(err => console.log(err))
     }
